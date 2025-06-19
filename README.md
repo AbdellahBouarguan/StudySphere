@@ -58,7 +58,7 @@ StudySphere is a productivity and study tracking web application that helps user
 2. **Create a virtual environment and activate it:**
    ```sh
    python -m venv venv
-   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
 3. **Install dependencies:**
