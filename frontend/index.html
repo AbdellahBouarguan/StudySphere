@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Study Sphere</title>
+
+    <!-- Bootstrap 3.4.1 CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+
+    <!-- Optional Bootstrap 3.4.1 JS (for dropdowns, modals, etc.) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <div id="status"></div>
+    <button id="logout-btn">Logout</button>
+
+    <script>
+      // Check login status on page load
+      async function checkLoginStatus() {
+        const response = await fetch("/api/auth/status", {
+          method: "GET",
+          credentials: "include", // Include the session cookie
+        });
+
+        const data = await response.json();
+        if (data.authenticated) {
+          document.getElementById(
+            "status"
+          ).innerText = `Logged in as: ${data.username}`;
+        } else {
+          window.location.href = "/login.html";
+        }
+      }
+      checkLoginStatus();
+
+      // Handle logout button click
+      document
+        .getElementById("logout-btn")
+        .addEventListener("click", async () => {
+          const response = await fetch("/api/auth/logout", {
+            method: "POST",
+            credentials: "include", // Include the session cookie
+          });
+
+          const data = await response.json();
+          if (response.ok) {
+            alert(data.message); // "Logged out"
+            // Optionally refresh login status or redirect
+            location.reload(); // or redirect to login: window.location.href = '/login.html';
+          } else {
+            alert("Logout failed");
+          }
+        });
+    </script>
+  </body>
+</html>

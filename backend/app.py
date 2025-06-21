@@ -1,5 +1,6 @@
 from flask import Flask
 from backend.extensions import db, login_manager
+from backend.models import User
 
 def create_app():
     app = Flask(__name__, static_folder='../frontend', static_url_path='/')
@@ -25,6 +26,10 @@ def create_app():
     app.register_blueprint(study_bp)
     app.register_blueprint(groups_bp)
     app.register_blueprint(tasks_bp)
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
 
     @app.route('/')
     def index():

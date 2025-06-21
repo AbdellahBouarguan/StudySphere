@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Study Sphere</title>
+    <script>
+      // redirect to index.html if already logged in
+      async function checkLoginStatus() {
+        const response = await fetch("/api/auth/status", {
+          method: "GET",
+          credentials: "include", // Include the session cookie
+        });
+
+        const data = await response.json();
+        if (data.authenticated) {
+          window.location.href = "/index.html"; // Redirect to main page if logged in
+        }
+      }
+      checkLoginStatus();
+    </script>
+    <!-- Bootstrap 3.4.1 CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+
+    <!-- Optional Bootstrap 3.4.1 JS (for dropdowns, modals, etc.) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <form id="login-form">
+      <input type="text" id="username" placeholder="Username" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="/register.html">Register here</a></p>
+    <script>
+      document
+        .getElementById("login-form")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const username = document.getElementById("username").value;
+          const password = document.getElementById("password").value;
+
+          const response = await fetch("/api/auth/login", {
+            method: "POST",
+            credentials: "include", // Important to include cookies!
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username, password }),
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            alert(data.message); // Login successful
+            // Optionally redirect to a protected page
+            window.location.href = "/index.html"; // Redirect to main page
+          } else {
+            alert(data.error); // Show error
+          }
+        });
+    </script>
+  </body>
+</html>

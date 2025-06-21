@@ -27,6 +27,19 @@ def login():
         return jsonify({'message': 'Login successful'})
     return jsonify({'error': 'Invalid credentials'}), 401
 
+
+@bp.route('/status', methods=['GET'])
+def status():
+    if current_user.is_authenticated:
+        return jsonify({
+            'authenticated': True,
+            'username': current_user.username
+        })
+    else:
+        return jsonify({
+            'authenticated': False
+        })
+
 @bp.route('/logout', methods=['POST'])
 @login_required
 def logout():
