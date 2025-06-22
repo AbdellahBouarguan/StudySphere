@@ -4,21 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Study Sphere</title>
-    <script>
-      // redirect to index.html if already logged in
-      async function checkLoginStatus() {
-        const response = await fetch("/api/auth/status", {
-          method: "GET",
-          credentials: "include", // Include the session cookie
-        });
-
-        const data = await response.json();
-        if (data.authenticated) {
-          window.location.href = "/index.html"; // Redirect to main page if logged in
-        }
-      }
-      checkLoginStatus();
-    </script>
+    <script src="js/handleRegisterPageHead.js"></script>
     <!-- Bootstrap 3.4.1 CSS -->
     <link
       rel="stylesheet"
@@ -81,34 +67,6 @@
         </p>
       </div>
     </div>
-    <script>
-      document
-        .getElementById("register-form")
-        .addEventListener("submit", async (e) => {
-          e.preventDefault();
-
-          const username = document.getElementById("username").value;
-          const password = document.getElementById("password").value;
-
-          const response = await fetch("/api/auth/register", {
-            method: "POST",
-            credentials: "include", // Important to include cookies!
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ username, password }),
-          });
-
-          const data = await response.json();
-
-          if (response.ok) {
-            alert(data.message); // Register successful
-            // Optionally redirect to a protected page
-            window.location.href = "/login.html"; // Redirect to main page
-          } else {
-            alert(data.error); // Show error
-          }
-        });
-    </script>
+    <script src="js/handleRegisterPageBody.js"></script>
   </body>
 </html>
