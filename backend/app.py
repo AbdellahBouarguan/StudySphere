@@ -21,11 +21,13 @@ def create_app():
     from backend.routes.study import bp as study_bp
     from backend.routes.groups import bp as groups_bp
     from backend.routes.tasks import bp as tasks_bp
+    from backend.routes.subjects import bp as subjects_bp
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(study_bp)
     app.register_blueprint(groups_bp)
     app.register_blueprint(tasks_bp)
+    app.register_blueprint(subjects_bp)
 
     @login_manager.user_loader
     def load_user(user_id):
