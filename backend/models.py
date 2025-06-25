@@ -22,7 +22,7 @@ class StudySession(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     subject = db.Column(db.String(100), nullable=False)
-    duration = db.Column(db.Integer, nullable=False)  # in minutes
+    duration = db.Column(db.String(8), nullable=False)  # Format: "HH:MM:SS"
     timestamp = db.Column(db.DateTime, default=datetime.datetime.now(datetime.UTC))
 
 
