@@ -17,6 +17,12 @@ def add_study_session():
     db.session.commit()
     return jsonify({'message': 'Study session added'})
 
+def parse_duration(duration_str):
+    """Parse 'HH:MM:SS' string to seconds."""
+    h, m, s = map(int, duration_str.split(':'))
+    return h * 3600 + m * 60 + s
+
+
 @bp.route('/today', methods=['GET'])
 @login_required
 def get_today_study():
@@ -31,5 +37,6 @@ def get_today_study():
     ).all()
     result = {}
     for s in sessions:
-        result[s.subject] = result.get(s.subject, 0) + s.duration
+        result[s.subject] = result.get(s.subject, 0) + parse_duration(s.duration)
+        
     return jsonify(result)
