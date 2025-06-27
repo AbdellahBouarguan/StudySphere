@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Study Sphere - Tasks</title>
+
+    <!-- Bootstrap 3.4.1 CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+
+    <!-- Bootstrap JS + jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+      .navbar-custom {
+        background-color: #5375e2;
+        border-color: #3a57c1;
+      }
+      .navbar-custom .navbar-brand,
+      .navbar-custom .navbar-nav > li > a {
+        color: #fff;
+      }
+      .navbar-custom .navbar-nav > li > a:hover,
+      .navbar-custom .navbar-nav > li > a:focus {
+        color: #f3aa92;
+      }
+      .navbar-custom .navbar-nav > .active > a {
+        color: #f3aa92;
+        font-weight: bold;
+      }
+      #logout-btn {
+        background-color: red;
+        color: white;
+        margin-top: 10px;
+      }
+      .task-item.completed {
+        text-decoration: line-through;
+        color: gray;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-custom navbar-static-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#StudySphereNavbar"
+          >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span><span class="icon-bar"></span
+            ><span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">StudySphere</a>
+        </div>
+        <div class="collapse navbar-collapse" id="StudySphereNavbar">
+          <ul class="nav navbar-nav">
+            <li><a href="/">Track Study Sessions</a></li>
+            <li class="active"><a href="/tasks.html">Manage Tasks</a></li>
+            <li><a href="#study-groups">Study Groups</a></li>
+            <li><a href="#group-members">Group Members</a></li>
+            <li><a href="#group-rankings">Group Rankings</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><button id="logout-btn" class="btn btn-sm">Logout</button></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <h2 class="text-center">📝 Task Manager</h2>
+
+      <div class="input-group" style="margin-top: 20px">
+        <input
+          id="task-input"
+          type="text"
+          class="form-control"
+          placeholder="Enter a new task..."
+        />
+        <span class="input-group-btn">
+          <button id="add-task-btn" class="btn btn-success">Add Task</button>
+        </span>
+      </div>
+
+      <ul id="task-list" class="list-group" style="margin-top: 20px"></ul>
+    </div>
+
+    <script src="js/handleTasksPage.js"></script>
+  </body>
+</html>
