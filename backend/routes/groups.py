@@ -47,15 +47,22 @@ def group_members(group_id):
 @bp.route('/ranking/<int:group_id>', methods=['GET'])
 @login_required
 def group_ranking(group_id):
-    # Query study sessions of group members, sum durations per user
     members = GroupMember.query.filter_by(group_id=group_id).all()
     user_ids = [m.user_id for m in members]
+
+    def parse_duration(duration_str):
+        try:
+            h, m, s = map(int, duration_str.split(':'))
+            return h * 3600 + m * 60 + s
+        except:
+            return 0
+
     rankings = {}
     for user_id in user_ids:
-        total = db.session.query(db.func.sum(StudySession.duration)).filter(
-            StudySession.user_id == user_id).scalar() or 0
         user = User.query.get(user_id)
+        sessions = StudySession.query.filter_by(user_id=user_id).all()
+        total = sum(parse_duration(s.duration) for s in sessions)
         rankings[user.username] = total
-    # Sort descending by study time
+
     sorted_rankings = dict(sorted(rankings.items(), key=lambda item: item[1], reverse=True))
     return jsonify(sorted_rankings)
