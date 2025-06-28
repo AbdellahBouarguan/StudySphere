@@ -28,14 +28,19 @@ StudySphere/
 1. **Clone the repository:**
 
    ```sh
-   git clone <repository-url>
+   git clone https://github.com/AbdellahBouarguan/StudySphere.git
    cd StudySphere
+   ```
+2. **Create a virtual environment and activate it:**
+   ```sh
+   python -m venv venvAdd commentMore actions
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
 2. **Install dependencies:**
 
    ```sh
-   pip install -r requirements.txt
+   pip install flask flask-login flask-sqlalchemy werkzeug
    ```
 
 3. **Run the application:**
