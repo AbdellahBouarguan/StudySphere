@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Study Groups</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+      h2 {
+        margin-top: 0;
+      }
+      .tab-pane {
+        padding-top: 20px;
+      }
+    </style>
+    <link rel="stylesheet" href="style/base.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-custom navbar-static-top">
+      <div class="container-fluid">
+        <!-- Brand and toggle grouped for mobile -->
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#StudySphereNavbar"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">StudySphere</a>
+        </div>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="StudySphereNavbar">
+          <ul class="nav navbar-nav">
+            <li>
+              <a href="/">Track Study Sessions</a>
+            </li>
+            <li><a href="/tasks.html">Manage Tasks</a></li>
+            <li class="active"><a href="/groups.html">Study Groups</a></li>
+          </ul>
+          <div class="nav navbar-nav navbar-right center-block">
+            <button id="logout-btn" class="btn btn-default">Logout</button>
+          </div>
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container-fluid -->
+    </nav>
+    <div class="container">
+      <h1>Study Groups</h1>
+
+      <!-- Bootstrap Tabs -->
+      <ul class="nav nav-tabs">
+        <li class="active">
+          <a data-toggle="tab" href="#create">Create Group</a>
+        </li>
+        <li><a data-toggle="tab" href="#join">Join Group</a></li>
+        <li><a data-toggle="tab" href="#members">View Members</a></li>
+        <li><a data-toggle="tab" href="#ranking">Group Ranking</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <!-- Create Group -->
+        <div id="create" class="tab-pane fade in active group-section">
+          <h2>Create Group</h2>
+          <input
+            type="text"
+            id="group-name"
+            class="form-control"
+            placeholder="Group Name"
+          />
+          <br />
+          <button class="btn btn-primary" onclick="createGroup()">
+            Create
+          </button>
+        </div>
+
+        <!-- Join Group -->
+        <div id="join" class="tab-pane fade group-section">
+          <h2>Join Group</h2>
+          <input
+            type="number"
+            id="join-group-id"
+            class="form-control"
+            placeholder="Group ID"
+          />
+          <br />
+          <button class="btn btn-success" onclick="joinGroup()">Join</button>
+        </div>
+
+        <!-- View Members -->
+        <div id="members" class="tab-pane fade group-section">
+          <h2>View Members</h2>
+          <input
+            type="number"
+            id="member-group-id"
+            class="form-control"
+            placeholder="Group ID"
+          />
+          <br />
+          <button class="btn btn-info" onclick="viewMembers()">
+            Show Members
+          </button>
+          <ul
+            id="members-list"
+            class="list-group"
+            style="margin-top: 15px"
+          ></ul>
+        </div>
+
+        <!-- Group Ranking -->
+        <div id="ranking" class="tab-pane fade group-section">
+          <h2>Group Ranking</h2>
+          <input
+            type="number"
+            id="ranking-group-id"
+            class="form-control"
+            placeholder="Group ID"
+          />
+          <br />
+          <button class="btn btn-warning" onclick="viewRanking()">
+            Show Ranking
+          </button>
+          <ol
+            id="ranking-list"
+            class="list-group"
+            style="margin-top: 15px"
+          ></ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script src="js/handleGroupsPage.js"></script>
+  </body>
+</html>
